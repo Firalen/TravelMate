@@ -56,8 +56,9 @@ export async function POST(
     // Check if user is already a participant
     const invitedUser = await User.findOne({ email });
     if (invitedUser) {
+      const invitedUserIdStr = String(invitedUser._id);
       const isParticipant = trip.participants.some(
-        (p: any) => p.user.toString() === invitedUser._id.toString()
+        (p: any) => p.user.toString() === invitedUserIdStr
       );
       if (isParticipant) {
         return NextResponse.json(

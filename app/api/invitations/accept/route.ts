@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+import mongoose from 'mongoose';
 import { authOptions } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Invitation from '@/models/Invitation';
@@ -46,12 +47,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Trip not found' }, { status: 404 });
     }
 
-    // Add user as participant
-    trip.participants.push({
-      user: session.user.id,
-      role: invitation.role,
-      joinedAt: new Date(),
-    });
+    if (!mongoose.Types.ObjectId.isValid(session.user.id)) {
+      return NextResponse.json(
+        { error: 'Invalid user identifier' },
+        { status: 400 }
+      );
+    }
+
+    const userObjectId = new mongoose.Types.ObjectId(session.user.id);
+
+    // Avoid duplicate participant entries
+    const alreadyParticipant = trip.participants.some((participant) =>
+      participant.user.equals(userObjectId)
+    );
+
+    if (!alreadyParticipant) {
+      trip.participants.push({
+        user: userObjectId,
+        role: invitation.role,
+        joinedAt: new Date(),
+      });
+    }
 
     await trip.save();
 

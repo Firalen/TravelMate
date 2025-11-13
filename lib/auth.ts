@@ -17,19 +17,22 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials: { email?: string; password?: string }) {
-        if (!credentials?.email || !credentials?.password) {
+      async authorize(credentials) {
+        const email = credentials?.email as string | undefined;
+        const password = credentials?.password as string | undefined;
+
+        if (!email || !password) {
           throw new Error('Please provide email and password');
         }
 
         await connectDB();
-        const user = await User.findOne({ email: credentials.email }).select('+password');
+        const user = await User.findOne({ email }).select('+password');
 
         if (!user || !user.password) {
           throw new Error('Invalid credentials');
         }
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if (!isPasswordValid) {
           throw new Error('Invalid credentials');
