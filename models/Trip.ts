@@ -92,9 +92,10 @@ const TripSchema: Schema = new Schema(
 );
 
 // Generate shareable link before saving
-TripSchema.pre('save', async function (next) {
+TripSchema.pre('save', async function (this: ITrip, next) {
   if (this.isPublic && !this.shareableLink) {
-    this.shareableLink = `trip-${this._id.toString()}-${Date.now()}`;
+    const id = this._id as mongoose.Types.ObjectId;
+    this.shareableLink = `trip-${id.toString()}-${Date.now()}`;
   }
   next();
 });
