@@ -43,19 +43,19 @@ export default function TripDetail({ trip: initialTrip }: TripDetailProps) {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+    <div className="container mx-auto px-4 py-4 md:py-8">
+      <div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-4 md:mb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
+          <div className="flex-1">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
               {trip.title}
             </h1>
-            <p className="text-gray-600 text-lg">{trip.destination}</p>
+            <p className="text-gray-600 text-base md:text-lg">{trip.destination}</p>
           </div>
           {isAdmin && (
             <button
               onClick={() => setShowInviteModal(true)}
-              className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+              className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors text-sm md:text-base whitespace-nowrap"
             >
               Invite Friends
             </button>
@@ -63,10 +63,10 @@ export default function TripDetail({ trip: initialTrip }: TripDetailProps) {
         </div>
 
         {trip.description && (
-          <p className="text-gray-700 mb-4">{trip.description}</p>
+          <p className="text-gray-700 mb-4 text-sm md:text-base">{trip.description}</p>
         )}
 
-        <div className="flex gap-6 text-sm text-gray-600 mb-4">
+        <div className="flex flex-col sm:flex-row sm:gap-6 gap-3 text-sm text-gray-600 mb-4">
           <div>
             <span className="font-semibold">Start:</span>{' '}
             {format(new Date(trip.startDate), 'MMM d, yyyy')}
@@ -116,8 +116,8 @@ export default function TripDetail({ trip: initialTrip }: TripDetailProps) {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+      <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
           Itinerary Planning
         </h2>
 
@@ -125,12 +125,12 @@ export default function TripDetail({ trip: initialTrip }: TripDetailProps) {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Select Date
           </label>
-          <div className="flex gap-2 overflow-x-auto pb-2">
+          <div className="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2">
             {dates.map((date) => (
               <button
                 key={date}
                 onClick={() => setSelectedDate(date)}
-                className={`px-4 py-2 rounded-md whitespace-nowrap transition-colors ${
+                className={`px-3 md:px-4 py-2 rounded-md whitespace-nowrap transition-colors text-sm md:text-base flex-shrink-0 ${
                   selectedDate === date
                     ? 'bg-primary-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

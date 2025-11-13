@@ -154,22 +154,22 @@ export default function ItineraryPlanner({
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4 text-black">
-        <h3 className="text-lg font-semibold text-gray-900">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4 text-black">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">
           {format(new Date(date), 'EEEE, MMMM d, yyyy')}
         </h3>
         {isAdmin && (
           <div className="flex gap-2">
             <button
               onClick={() => setShowAddModal(true)}
-              className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
+              className="px-3 sm:px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 text-sm sm:text-base"
             >
               + Add Activity
             </button>
             {activities.length > 0 && (
               <button
                 onClick={handleSaveItinerary}
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                className="px-3 sm:px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm sm:text-base"
               >
                 Save Itinerary
               </button>
@@ -190,24 +190,26 @@ export default function ItineraryPlanner({
             .map((activity, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow"
               >
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-gray-900 text-sm sm:text-base">
                       {activity.title}
                     </h4>
                     {activity.location.name && (
-                      <p className="text-sm text-gray-600">
+                      <p className="text-xs sm:text-sm text-gray-600">
                         📍 {activity.location.name}
                       </p>
                     )}
-                    <p className="text-sm text-gray-500">
-                      {activity.location.address}
-                    </p>
+                    {activity.location.address && (
+                      <p className="text-xs sm:text-sm text-gray-500">
+                        {activity.location.address}
+                      </p>
+                    )}
                   </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-gray-700">
+                  <div className="text-left sm:text-right">
+                    <p className="text-xs sm:text-sm font-medium text-gray-700 whitespace-nowrap">
                       {activity.startTime}
                       {activity.endTime && ` - ${activity.endTime}`}
                     </p>
@@ -227,9 +229,9 @@ export default function ItineraryPlanner({
       )}
 
       {showAddModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center text-black justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 className="text-xl font-bold mb-4">Add Activity</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center text-black justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-lg p-4 sm:p-6 w-full max-w-md my-4">
+            <h3 className="text-lg sm:text-xl font-bold mb-4">Add Activity</h3>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -283,7 +285,7 @@ export default function ItineraryPlanner({
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Start Time *
@@ -295,7 +297,7 @@ export default function ItineraryPlanner({
                     onChange={(e) =>
                       setNewActivity({ ...newActivity, startTime: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm sm:text-base"
                   />
                 </div>
                 <div>
@@ -308,7 +310,7 @@ export default function ItineraryPlanner({
                     onChange={(e) =>
                       setNewActivity({ ...newActivity, endTime: e.target.value })
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm sm:text-base"
                   />
                 </div>
               </div>
@@ -325,16 +327,16 @@ export default function ItineraryPlanner({
                   className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 />
               </div>
-              <div className="flex gap-4 justify-end">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-end">
                 <button
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
+                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm sm:text-base order-2 sm:order-1"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleAddActivity}
-                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
+                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 text-sm sm:text-base order-1 sm:order-2"
                 >
                   Add Activity
                 </button>

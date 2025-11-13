@@ -48,21 +48,21 @@ export default function CreateTripButton() {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-110 transform transition-all duration-300 flex items-center gap-2"
+        className="px-4 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-bold text-sm md:text-lg shadow-xl hover:shadow-2xl hover:scale-110 transform transition-all duration-300 flex items-center gap-2"
       >
-        <span className="text-2xl">+</span> Create Trip
+        <span className="text-xl md:text-2xl">+</span> <span className="hidden sm:inline">Create Trip</span><span className="sm:hidden">Create</span>
       </button>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl border-4 border-purple-100 animate-float">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="text-4xl">✈️</div>
-              <h2 className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-8 w-full max-w-md shadow-2xl border-4 border-purple-100 animate-float my-4">
+            <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+              <div className="text-3xl md:text-4xl">✈️</div>
+              <h2 className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                 Create New Trip
               </h2>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-5 text-black">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5 text-black">
               <div>
                 <label className="block text-sm font-bold text-gray-800 mb-2">
                   Title *
@@ -107,7 +107,7 @@ export default function CreateTripButton() {
                   placeholder="Tell us about your trip..."
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-bold text-gray-800 mb-2">
                     Start Date *
@@ -119,7 +119,7 @@ export default function CreateTripButton() {
                     onChange={(e) =>
                       setFormData({ ...formData, startDate: e.target.value })
                     }
-                    className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                    className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all text-sm md:text-base"
                   />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ export default function CreateTripButton() {
                     onChange={(e) =>
                       setFormData({ ...formData, endDate: e.target.value })
                     }
-                    className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                    className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -151,18 +151,18 @@ export default function CreateTripButton() {
                   Make trip public
                 </label>
               </div>
-              <div className="flex gap-4 justify-end mt-6">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-end mt-4 md:mt-6">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-full font-semibold transition-all duration-300"
+                  className="px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-full font-semibold transition-all duration-300 text-sm md:text-base order-2 sm:order-1"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-bold hover:scale-110 transform transition-all duration-300 shadow-lg disabled:opacity-50 disabled:transform-none"
+                  className="px-6 md:px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-bold hover:scale-110 transform transition-all duration-300 shadow-lg disabled:opacity-50 disabled:transform-none text-sm md:text-base order-1 sm:order-2"
                 >
                   {loading ? 'Creating... ✨' : 'Create Trip 🚀'}
                 </button>

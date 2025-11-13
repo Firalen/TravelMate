@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'TravelMate - Trip Planning and Itinerary Builder',
   description: 'Plan your trips collaboratively with friends and family',
+  viewport: 'width=device-width, initial-scale=1',
 };
 
 export default function RootLayout({
